@@ -9,7 +9,7 @@ use huffman::*;
 
 #[pyclass]
 #[derive(Default)]
-struct Value {
+struct Huffpy {
     root: Box<Node>,
     assign: HashMap<char, String>,
     text: String,
@@ -18,10 +18,10 @@ struct Value {
 }
 
 #[pymethods]
-impl Value {
+impl Huffpy {
     #[new]
     pub fn new() -> Self {
-        Value::default()
+        Huffpy::default() // TOOD: (lazy instance) I will make it better
     }
     // #[PyObjectProtocol]
     pub fn __str__(&self) -> PyResult<String> {
@@ -79,6 +79,6 @@ impl Value {
 #[pymodule]
 fn huffpy(_py: Python, m: &PyModule) -> PyResult<()> {
     /* Main Class of Huffpy library */
-    m.add_class::<Value>()?;
+    m.add_class::<Huffpy>()?;
     Ok(())
 }
